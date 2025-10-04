@@ -1,0 +1,14 @@
+# Windows / VS / dotnet
+*.user
+*.suo
+*.tmp
+*.log
+*.cache
+bin/
+obj/
+.vs/
+.nuget/
+packages/
+*.nupkg
+Thumbs.db
+Desktop.ini
