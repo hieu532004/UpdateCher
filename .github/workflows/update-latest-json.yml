@@ -13,8 +13,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        with: { fetch-depth: 0 }
 
       - name: Extract release info
         id: info
@@ -26,12 +25,9 @@ jobs:
             const tag = rel.tag_name || "";
             const version = tag.startsWith("v") ? tag.slice(1) : tag;
             const published_at = rel.published_at || new Date().toISOString();
-            // pick first .exe asset
+            // chọn asset .exe đầu tiên
             const exe = rel.assets.find(a => a.name && a.name.toLowerCase().endsWith(".exe"));
-            if(!exe){
-              core.setFailed("No .exe asset attached to this release.");
-              return;
-            }
+            if(!exe){ core.setFailed("No .exe asset attached to this release."); return; }
             const owner = context.repo.owner;
             const repo  = context.repo.repo;
             const downloadUrl = `https://github.com/${owner}/${repo}/releases/download/${encodeURIComponent(tag)}/${encodeURIComponent(exe.name)}`;
@@ -43,8 +39,7 @@ jobs:
             core.setOutput("download_url", downloadUrl);
 
       - name: Download .exe asset
-        env:
-          GH_TOKEN: ${{ github.token }}
+        env: { GH_TOKEN: ${{ github.token }} }
         run: |
           set -e
           ASSET_ID='${{ steps.info.outputs.asset_id }}'
