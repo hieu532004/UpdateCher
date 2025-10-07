@@ -1,5 +1,5 @@
 param(
-  [string]$Version   = "1.0.6",
+  [string]$Version   = "2.0.1",
   [string]$Notes     = "Sửa lỗi & tối ưu.",
   [string]$AppName   = "MMO Automation",
   [string]$GithubUser= "<user>",
